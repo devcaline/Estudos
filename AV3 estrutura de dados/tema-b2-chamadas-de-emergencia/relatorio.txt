@@ -1,0 +1,4 @@
+===== RELATORIO =====
+
+Chamadas na pilha: 3
+Chamadas atendidas: 1
