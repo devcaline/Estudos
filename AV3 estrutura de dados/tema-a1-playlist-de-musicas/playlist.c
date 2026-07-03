@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
+#include <unistd.h>
 
 #define MAX 100
 #define LARG 40 /* largura interna do menu */
@@ -34,6 +36,41 @@ void repetir(const char *s, int n) {
   for (int i = 0; i < n; i++) {
     printf("%s", s);
   }
+}
+
+/* ==================================================
+   LIMPAR TELA
+   Apaga tudo o que esta na tela do terminal.
+
+   Usa codigos de escape ANSI para levar o cursor ao
+   topo e limpar o conteudo, deixando a tela pronta
+   para a proxima sessao do programa.
+   ================================================== */
+void limparTela() { printf("\033[H\033[J"); }
+
+/* ==================================================
+   CABECALHO
+   Desenha o cabecalho da sessao atual do programa.
+
+   Recebe o nome da sessao (ex.: "BUSCAR MUSICA") e o
+   mostra dentro de uma caixa centralizada, para o
+   usuario saber sempre em que parte do sistema esta.
+   ================================================== */
+void cabecalho(const char *titulo) {
+  int n = (int)strlen(titulo);
+  int esq = (LARG - n) / 2;
+  int dir = LARG - n - esq;
+  printf("\n╔");
+  repetir("═", LARG);
+  printf("╗\n");
+  printf("║");
+  repetir(" ", esq);
+  printf("%s", titulo);
+  repetir(" ", dir);
+  printf("║\n");
+  printf("╚");
+  repetir("═", LARG);
+  printf("╝\n");
 }
 
 /* ==================================================
@@ -163,16 +200,79 @@ void limparBuffer() {
 }
 
 /* ==================================================
-   BUSCAR POR ID
-   Procura uma musica pelo seu id na playlist.
+   LER DURACAO
+   Le a duracao aceitando apenas numeros inteiros.
 
-   Percorre o vetor e devolve a posicao da musica
-   que tiver o id informado. Se nenhuma for
-   encontrada, devolve -1.
+   Mostra o texto de pedido e le a resposta como
+   linha. Se o usuario digitar algo que nao seja
+   composto so por numeros, avisa e pergunta de novo,
+   ate receber uma duracao valida em segundos.
    ================================================== */
-int buscarPorId(int id) {
+int lerDuracao(const char *prompt) {
+  char buffer[100];
+
+  while (1) {
+    printf("%s", prompt);
+    lerTexto(buffer, 100);
+
+    /* Valida: nao pode ser vazio e todo caractere deve ser digito */
+    int valido = strlen(buffer) > 0;
+    for (int i = 0; buffer[i] != '\0'; i++) {
+      if (buffer[i] < '0' || buffer[i] > '9') {
+        valido = 0;
+        break;
+      }
+    }
+
+    if (valido) {
+      int valor;
+      sscanf(buffer, "%d", &valor);
+      return valor;
+    }
+
+    printf("  [!] Duracao invalida. Digite apenas numeros (segundos).\n");
+  }
+}
+
+/* ==================================================
+   PAUSAR E LIMPAR
+   Espera alguns segundos e depois limpa a tela.
+
+   Da tempo para o usuario ler o que esta na tela
+   (uma mensagem ou uma ficha) antes de apagar tudo
+   e devolver o controle para o menu principal.
+   ================================================== */
+void pausarELimpar() {
+  fflush(stdout); /* garante que tudo aparece antes da pausa */
+  sleep(3);
+  limparTela();
+}
+
+/* ==================================================
+   MENSAGEM ERRO
+   Mostra um aviso e pausa antes de voltar ao menu.
+
+   Exibe o texto de erro, espera alguns segundos para
+   o usuario conseguir ler e entao limpa a tela,
+   devolvendo o controle para o menu principal.
+   ================================================== */
+void mensagemErro(const char *texto) {
+  printf("\n  [!] %s\n", texto);
+  pausarELimpar();
+}
+
+/* ==================================================
+   BUSCAR POR NOME
+   Procura uma musica pelo seu titulo na playlist.
+
+   Percorre o vetor e devolve a posicao da primeira
+   musica cujo titulo seja igual ao informado (sem
+   diferenciar maiusculas de minusculas). Se nenhuma
+   for encontrada, devolve -1.
+   ================================================== */
+int buscarPorNome(const char *nome) {
   for (int i = 0; i < quantidade; i++) {
-    if (playlist[i].id == id) {
+    if (strcasecmp(playlist[i].titulo, nome) == 0) {
       return i;
     }
   }
@@ -188,33 +288,47 @@ int buscarPorId(int id) {
    no vetor. Avisa se a playlist estiver cheia.
    ================================================== */
 void cadastrar() {
-  if (quantidade >= MAX) {
-    printf("  [!] Playlist cheia\n");
-    return;
-  }
+  char resposta[10];
 
-  Musica m;
-  m.id = proximoId; /* ID unico atribuido automaticamente */
+  do {
+    if (quantidade >= MAX) {
+      mensagemErro("Playlist cheia");
+      return;
+    }
 
-  printf("\n  -- Cadastro de musica --\n");
-  printf("  Titulo: ");
-  lerTexto(m.titulo, 100);
+    Musica m;
+    m.id = proximoId; /* ID unico atribuido automaticamente */
 
-  printf("  Artista: ");
-  lerTexto(m.artista, 100);
+    printf("\n  Titulo: ");
+    lerTexto(m.titulo, 100);
 
-  printf("  Duracao (em segundos): ");
-  scanf("%d", &m.duracao);
-  limparBuffer();
+    printf("  Artista: ");
+    lerTexto(m.artista, 100);
 
-  printf("  Genero: ");
-  lerTexto(m.genero, 50);
+    m.duracao = lerDuracao("  Duracao (em segundos): ");
 
-  playlist[quantidade] = m; /* mantem a ordem de cadastro */
-  quantidade++;
-  proximoId++;
+    printf("  Genero: ");
+    lerTexto(m.genero, 50);
 
-  printf("  [OK] Musica cadastrada com sucesso! ID: %d\n", m.id);
+    playlist[quantidade] = m; /* mantem a ordem de cadastro */
+    quantidade++;
+    proximoId++;
+
+    printf("  [OK] Musica cadastrada com sucesso!\n");
+
+    /* Permite cadastrar varias musicas em sequencia */
+    printf("\n  Cadastrar outra musica? (s/n): ");
+    lerTexto(resposta, 10);
+
+    /* Prepara uma tela limpa para o proximo cadastro */
+    if (resposta[0] == 's' || resposta[0] == 'S') {
+      limparTela();
+      cabecalho("CADASTRAR MUSICA");
+    }
+  } while (resposta[0] == 's' || resposta[0] == 'S');
+
+  /* Ao sair do cadastro, limpa a tela antes de voltar ao menu */
+  limparTela();
 }
 
 /* ==================================================
@@ -226,18 +340,23 @@ void cadastrar() {
    informado nao exista.
    ================================================== */
 void buscar() {
-  int id;
-  printf("\n  ID da musica: ");
-  scanf("%d", &id);
-  limparBuffer();
+  if (quantidade == 0) {
+    mensagemErro("A playlist esta vazia. Cadastre uma musica primeiro.");
+    return;
+  }
 
-  int pos = buscarPorId(id);
+  char nome[100];
+  printf("\n  Titulo da musica: ");
+  lerTexto(nome, 100);
+
+  int pos = buscarPorNome(nome);
   if (pos == -1) {
-    printf("  [!] Musica nao encontrada\n");
+    mensagemErro("Musica nao encontrada");
     return;
   }
 
   imprimirDetalhe(playlist[pos]);
+  pausarELimpar();
 }
 
 /* ==================================================
@@ -251,16 +370,24 @@ void buscar() {
    garantindo que ele continue unico.
    ================================================== */
 void editar() {
-  int id;
-  printf("\n  ID da musica a editar: ");
-  scanf("%d", &id);
-  limparBuffer();
-
-  int pos = buscarPorId(id);
-  if (pos == -1) {
-    printf("  [!] Musica nao encontrada\n");
+  if (quantidade == 0) {
+    mensagemErro("A playlist esta vazia. Cadastre uma musica primeiro.");
     return;
   }
+
+  char nome[100];
+  printf("\n  Titulo da musica a editar: ");
+  lerTexto(nome, 100);
+
+  int pos = buscarPorNome(nome);
+  if (pos == -1) {
+    mensagemErro("Musica nao encontrada");
+    return;
+  }
+
+  /* Tela limpa para comecar a edicao dos dados */
+  limparTela();
+  cabecalho("EDITAR MUSICA");
 
   printf("  Editando a musica:\n");
   imprimirDetalhe(playlist[pos]);
@@ -295,6 +422,7 @@ void editar() {
   }
 
   printf("  [OK] Musica atualizada com sucesso!\n");
+  pausarELimpar();
 }
 
 /* ==================================================
@@ -306,14 +434,18 @@ void editar() {
    deixar buraco no vetor. Avisa se o id nao existir.
    ================================================== */
 void excluir() {
-  int id;
-  printf("\n  ID da musica a excluir: ");
-  scanf("%d", &id);
-  limparBuffer();
+  if (quantidade == 0) {
+    mensagemErro("A playlist esta vazia. Cadastre uma musica primeiro.");
+    return;
+  }
 
-  int pos = buscarPorId(id);
+  char nome[100];
+  printf("\n  Titulo da musica a excluir: ");
+  lerTexto(nome, 100);
+
+  int pos = buscarPorNome(nome);
   if (pos == -1) {
-    printf("  [!] Musica nao encontrada\n");
+    mensagemErro("Musica nao encontrada");
     return;
   }
 
@@ -324,6 +456,7 @@ void excluir() {
   quantidade--;
 
   printf("  [OK] Musica excluida com sucesso!\n");
+  pausarELimpar();
 }
 
 /* ==================================================
@@ -336,7 +469,7 @@ void excluir() {
    ================================================== */
 void listar() {
   if (quantidade == 0) {
-    printf("\n  [!] A playlist esta vazia\n");
+    mensagemErro("A playlist esta vazia");
     return;
   }
 
@@ -372,17 +505,28 @@ int main() {
     limparBuffer();
 
     if (op == 1) {
+      limparTela();
+      cabecalho("CADASTRAR MUSICA");
       cadastrar();
     } else if (op == 2) {
+      limparTela();
+      cabecalho("BUSCAR MUSICA");
       buscar();
     } else if (op == 3) {
+      limparTela();
+      cabecalho("EDITAR MUSICA");
       editar();
     } else if (op == 4) {
+      limparTela();
+      cabecalho("EXCLUIR MUSICA");
       excluir();
     } else if (op == 5) {
+      limparTela();
+      cabecalho("LISTAR MUSICAS");
       listar();
     } else if (op != 6) {
-      printf("  [!] Opcao invalida\n");
+      limparTela();
+      mensagemErro("Opcao invalida");
     }
   } while (op != 6);
 
