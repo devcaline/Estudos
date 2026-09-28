@@ -50,7 +50,7 @@ Ao iniciar, o programa carrega automaticamente os trabalhos salvos em
 
 Pré-requisito: ter o compilador **gcc** instalado.
 
-Dentro desta pasta (`tema-c2-fila-de-impressao/`):
+Dentro desta pasta (`fila-de-impressao/`):
 
 ```bash
 # Compilar

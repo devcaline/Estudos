@@ -1,6 +1,6 @@
 # 🎓 Sistema de Gestão Acadêmica — AV3
 
-> Trabalho da **Avaliação 3 (AV3)** da disciplina de **Algoritmo eLaboratório de Programação**.
+> Trabalho da **Avaliação 3 (AV3)** da disciplina de **Algoritmo e Laboratório de Programação**.
 
 Sistema de cadastro e gerenciamento acadêmico desenvolvido em **Linguagem C**, com interface de menus no terminal. O projeto aplica os conceitos vistos em sala: **structs**, **vetores de estruturas**, **funções**, **ponteiros**, **validação de entrada**, **algoritmos de busca e ordenação** e **relacionamento entre entidades (chaves primárias e estrangeiras)**.
 
@@ -79,10 +79,10 @@ As melhorias reutilizam as funções de busca já existentes, evitando duplicaç
 
 ```bash
 # Compilar
-gcc av3Jailson.c -o av3
+gcc gerenciamentoAlunos.c -o gerenciamentoAlunos
 
 # Executar
-./av3
+./gerenciamentoAlunos
 ```
 
 ---
@@ -102,6 +102,7 @@ gcc av3Jailson.c -o av3
 | **Disciplinas** | Algoritmo e Laboratório de Programação |
 | **Linguagem** | C |
 | **Tema** | Sistema de Gestão Acadêmica (CRUD com entidades relacionadas) |
+| **Apresentação** | [Vídeo no YouTube](https://youtu.be/IgdigVKp-jo) |
 
 ---
 

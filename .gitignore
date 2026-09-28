@@ -1,0 +1,27 @@
+# Sistema
+.DS_Store
+
+# Executáveis compilados (C)
+*.exe
+*.out
+*.o
+faculdade/estrutura-de-dados/av3/playlist-de-musicas/playlist
+faculdade/lab-de-programacao/av3-gerenciamento-alunos/gerenciamentoAlunos
+
+# Java
+*.class
+*.jar
+target/
+build/
+out/
+bin/
+.gradle/
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# Vídeos (entregas vão como link no README, não como arquivo)
+*.mov
+*.mp4

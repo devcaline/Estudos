@@ -15,9 +15,9 @@ Cada tema é um projeto independente em C, organizado em sua própria pasta.
 
 | Tema | Projeto | Responsável | Pasta |
 |------|---------|-------------|-------|
-| A1 | Playlist de Músicas | Victória Caroline Bittencourt Costa | [`tema-a1-playlist-de-musicas/`](tema-a1-playlist-de-musicas/) |
-| B2 | Chamadas de Emergência | William Silva Lago | [`tema-b2-chamadas-de-emergencia/`](tema-b2-chamadas-de-emergencia/) |
-| C2 | Fila de Impressão | Pedro Henrique Oliveira do Nascimento | [`tema-c2-fila-de-impressao/`](tema-c2-fila-de-impressao/) |
+| A1 | Playlist de Músicas | Victória Caroline Bittencourt Costa | [`playlist-de-musicas/`](playlist-de-musicas/) |
+| B2 | Chamadas de Emergência | William Silva Lago | [`chamadas-de-emergencia/`](chamadas-de-emergencia/) |
+| C2 | Fila de Impressão | Pedro Henrique Oliveira do Nascimento | [`fila-de-impressao/`](fila-de-impressao/) |
 
 Cada pasta possui seu próprio `README.md` com a explicação do projeto e as
 instruções de compilação e execução.

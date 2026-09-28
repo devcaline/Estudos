@@ -1,19 +1,38 @@
-# Estudos
-# 📚 Repositório de Estudos da Graduação
+# 📚 Estudos
 
-Este repositório foi criado com o objetivo de armazenar exercícios, atividades, exemplos e projetos desenvolvidos ao longo da graduação. O conteúdo serve como material de apoio para revisão dos conceitos estudados em sala de aula e prática de programação.
-Link para a apresenteção: https://youtu.be/IgdigVKp-jo?is=zh6_S5Inda3gQFq6
+Repositório com os trabalhos da graduação em **Ciência da Computação** (UNIJORGE) e projetos pessoais de programação.
 
-## 🎯 Objetivos
-
-- Organizar os códigos desenvolvidos durante a graduação.
-- Registrar a evolução do aprendizado ao longo do curso.
-- Disponibilizar exemplos de implementação de conceitos fundamentais.
-- Facilitar consultas futuras para estudos e revisões.
-
-## 📂 Estrutura do Repositório
+## 📂 Estrutura
 
 ```text
-📦 estudos-graduacao
-├── 📁 programacao-c
-└── 📄 README.md
+Estudos/
+├── faculdade/                      # trabalhos e exercícios, separados por disciplina
+│   ├── estrutura-de-dados/
+│   │   └── av3/                    # 3 projetos em C (playlist, chamadas, fila de impressão)
+│   ├── lab-de-programacao/
+│   │   └── av3-gerenciamento-alunos/
+│   └── programacao-em-c/
+│       └── lista-questoes/         # exercícios de pilha
+└── java/                           # projetos pessoais em Java
+```
+
+## 🎓 Faculdade
+
+| Disciplina | Trabalho | Linguagem |
+|------------|----------|-----------|
+| Estrutura de Dados | [AV3 — Playlist, Chamadas de Emergência e Fila de Impressão](faculdade/estrutura-de-dados/av3/) | C |
+| Algoritmo e Lab. de Programação | [AV3 — Sistema de Gestão Acadêmica](faculdade/lab-de-programacao/av3-gerenciamento-alunos/) | C |
+| Programação em C | [Lista de questões — Pilha](faculdade/programacao-em-c/lista-questoes/) | C |
+
+## ☕ Projetos em Java
+
+Veja a pasta [`java/`](java/).
+
+## 🗂️ Padrão de organização
+
+- **Trabalho da faculdade** → `faculdade/<disciplina>/<avaliacao-ou-lista>/`
+  (ex.: `faculdade/banco-de-dados/av1-modelagem/`)
+- **Projeto pessoal em Java** → `java/<numero>-<nome>/` (ex.: `java/01-calculadora/`)
+- Nomes de pastas em minúsculas, sem acento e com hífen no lugar de espaço.
+- Todo projeto tem um `README.md` explicando o que é e como executar.
+- Vídeos de apresentação entram como **link** no README do projeto, nunca como arquivo.

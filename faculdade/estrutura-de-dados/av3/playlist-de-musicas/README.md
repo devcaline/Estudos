@@ -46,7 +46,7 @@ A partir do menu principal, o usuário pode:
 
 Pré-requisito: ter o compilador **gcc** instalado.
 
-Dentro desta pasta (`tema-a1-playlist-de-musicas/`):
+Dentro desta pasta (`playlist-de-musicas/`):
 
 ```bash
 # Compilar
