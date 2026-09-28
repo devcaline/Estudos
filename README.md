@@ -8,11 +8,10 @@ Repositório com os trabalhos da graduação em **Ciência da Computação** (UN
 Estudos/
 ├── faculdade/                      # trabalhos e exercícios, separados por disciplina
 │   ├── estrutura-de-dados/
-│   │   └── av3/                    # 3 projetos em C (playlist, chamadas, fila de impressão)
-│   ├── lab-de-programacao/
-│   │   └── av3-gerenciamento-alunos/
-│   └── programacao-em-c/
-│       └── lista-questoes/         # exercícios de pilha
+│   │   ├── av3/                    # 3 projetos em C (playlist, chamadas, fila de impressão)
+│   │   └── lista-pilha/            # exercícios de pilha
+│   └── lab-de-programacao/
+│       └── av3-gerenciamento-alunos/
 └── java/                           # projetos pessoais em Java
 ```
 
@@ -21,8 +20,8 @@ Estudos/
 | Disciplina | Trabalho | Linguagem |
 |------------|----------|-----------|
 | Estrutura de Dados | [AV3 — Playlist, Chamadas de Emergência e Fila de Impressão](faculdade/estrutura-de-dados/av3/) | C |
+| Estrutura de Dados | [Lista de questões — Pilha](faculdade/estrutura-de-dados/lista-pilha/) | C |
 | Algoritmo e Lab. de Programação | [AV3 — Sistema de Gestão Acadêmica](faculdade/lab-de-programacao/av3-gerenciamento-alunos/) | C |
-| Programação em C | [Lista de questões — Pilha](faculdade/programacao-em-c/lista-questoes/) | C |
 
 ## ☕ Projetos em Java
 
