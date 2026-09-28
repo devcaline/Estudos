@@ -661,9 +661,45 @@ void consulta_cruzada_matricula(int ra){
     sleep(5);
 }
 
+// --- DADOS DE TESTE ---
+void popularDados(){
+    // 5 ALUNOS
+    strcpy(tbaluno[0].pk_cpf,"111.111.111-11"); strcpy(tbaluno[0].nome,"Ana Souza");      strcpy(tbaluno[0].admissao,"01/02/2023"); strcpy(tbaluno[0].dtNasc,"15/05/2000"); strcpy(tbaluno[0].escolaridade,"Ensino Medio");
+    strcpy(tbaluno[1].pk_cpf,"222.222.222-22"); strcpy(tbaluno[1].nome,"Bruno Lima");      strcpy(tbaluno[1].admissao,"10/03/2023"); strcpy(tbaluno[1].dtNasc,"20/08/1999"); strcpy(tbaluno[1].escolaridade,"Superior Incompleto");
+    strcpy(tbaluno[2].pk_cpf,"333.333.333-33"); strcpy(tbaluno[2].nome,"Carla Dias");      strcpy(tbaluno[2].admissao,"05/04/2023"); strcpy(tbaluno[2].dtNasc,"30/11/2001"); strcpy(tbaluno[2].escolaridade,"Ensino Medio");
+    strcpy(tbaluno[3].pk_cpf,"444.444.444-44"); strcpy(tbaluno[3].nome,"Diego Alves");     strcpy(tbaluno[3].admissao,"12/05/2023"); strcpy(tbaluno[3].dtNasc,"02/02/1998"); strcpy(tbaluno[3].escolaridade,"Superior Completo");
+    strcpy(tbaluno[4].pk_cpf,"555.555.555-55"); strcpy(tbaluno[4].nome,"Elena Castro");    strcpy(tbaluno[4].admissao,"20/06/2023"); strcpy(tbaluno[4].dtNasc,"25/12/2002"); strcpy(tbaluno[4].escolaridade,"Ensino Medio");
+    ida = 5;
+
+    // 5 CURSOS
+    tbcurso[0].pk_codCurso=101; strcpy(tbcurso[0].nome,"Logica de Programacao"); tbcurso[0].cargaHoraria=60;  strcpy(tbcurso[0].modalidade,"Presencial");
+    tbcurso[1].pk_codCurso=102; strcpy(tbcurso[1].nome,"Banco de Dados");        tbcurso[1].cargaHoraria=80;  strcpy(tbcurso[1].modalidade,"Online");
+    tbcurso[2].pk_codCurso=103; strcpy(tbcurso[2].nome,"Desenvolvimento Web");   tbcurso[2].cargaHoraria=120; strcpy(tbcurso[2].modalidade,"Semi-Presencial");
+    tbcurso[3].pk_codCurso=104; strcpy(tbcurso[3].nome,"Redes de Computadores"); tbcurso[3].cargaHoraria=90;  strcpy(tbcurso[3].modalidade,"Presencial");
+    tbcurso[4].pk_codCurso=105; strcpy(tbcurso[4].nome,"Inteligencia Artificial"); tbcurso[4].cargaHoraria=100; strcpy(tbcurso[4].modalidade,"Online");
+    idc = 5;
+
+    // 5 TURMAS
+    tbturma[0].pk_codTurma=1; strcpy(tbturma[0].nomeTurma,"Turma A"); tbturma[0].qtdAlunos=30; strcpy(tbturma[0].turno,"Manha");
+    tbturma[1].pk_codTurma=2; strcpy(tbturma[1].nomeTurma,"Turma B"); tbturma[1].qtdAlunos=25; strcpy(tbturma[1].turno,"Tarde");
+    tbturma[2].pk_codTurma=3; strcpy(tbturma[2].nomeTurma,"Turma C"); tbturma[2].qtdAlunos=40; strcpy(tbturma[2].turno,"Noite");
+    tbturma[3].pk_codTurma=4; strcpy(tbturma[3].nomeTurma,"Turma D"); tbturma[3].qtdAlunos=20; strcpy(tbturma[3].turno,"Manha");
+    tbturma[4].pk_codTurma=5; strcpy(tbturma[4].nomeTurma,"Turma E"); tbturma[4].qtdAlunos=35; strcpy(tbturma[4].turno,"Noite");
+    idt = 5;
+
+    // 5 MATRICULAS (FKs consistentes com os dados acima)
+    tbmatricula[0].pk_ra=1001; strcpy(tbmatricula[0].fk_cpf,"111.111.111-11"); tbmatricula[0].fk_codTurma=1; tbmatricula[0].fk_codCurso=101;
+    tbmatricula[1].pk_ra=1002; strcpy(tbmatricula[1].fk_cpf,"222.222.222-22"); tbmatricula[1].fk_codTurma=2; tbmatricula[1].fk_codCurso=102;
+    tbmatricula[2].pk_ra=1003; strcpy(tbmatricula[2].fk_cpf,"333.333.333-33"); tbmatricula[2].fk_codTurma=3; tbmatricula[2].fk_codCurso=103;
+    tbmatricula[3].pk_ra=1004; strcpy(tbmatricula[3].fk_cpf,"444.444.444-44"); tbmatricula[3].fk_codTurma=4; tbmatricula[3].fk_codCurso=104;
+    tbmatricula[4].pk_ra=1005; strcpy(tbmatricula[4].fk_cpf,"555.555.555-55"); tbmatricula[4].fk_codTurma=5; tbmatricula[4].fk_codCurso=105;
+    idm = 5;
+}
+
 void main()
 {
     setlocale(LC_ALL, "");
+    popularDados();
     do{
         system("clear");
         menu();
