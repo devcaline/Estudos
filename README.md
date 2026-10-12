@@ -23,6 +23,7 @@ Estudos/
 | Estrutura de Dados | [Lista de questões — Pilha](faculdade/estrutura-de-dados/lista-pilha/) | C |
 | Algoritmo e Lab. de Programação | [AV3 — Sistema de Gestão Acadêmica](faculdade/lab-de-programacao/av3-gerenciamento-alunos/) | C |
 | Análise Orientada a Objetos | [AV3 — Nexo, plataforma para psicólogos](https://github.com/devcaline/nexo-modelagem-av3) *(repositório próprio)* | UML |
+| Programação Orientada a Objetos | [Extensão — Urna Cidadã, simulador de urna eletrônica](https://github.com/devcaline/urna-cidada) *(repositório próprio)* | Java |
 
 ## ☕ Projetos em Java
 
