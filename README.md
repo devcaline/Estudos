@@ -22,7 +22,7 @@ Estudos/
 | Estrutura de Dados | [AV3 — Playlist, Chamadas de Emergência e Fila de Impressão](faculdade/estrutura-de-dados/av3/) | C |
 | Estrutura de Dados | [Lista de questões — Pilha](faculdade/estrutura-de-dados/lista-pilha/) | C |
 | Algoritmo e Lab. de Programação | [AV3 — Sistema de Gestão Acadêmica](faculdade/lab-de-programacao/av3-gerenciamento-alunos/) | C |
-| Modelagem Orientada a Objetos | [AV3 — Nexo, plataforma para psicólogos](https://github.com/devcaline/nexo-modelagem-av3) *(repositório próprio)* | UML |
+| Análise Orientada a Objetos | [AV3 — Nexo, plataforma para psicólogos](https://github.com/devcaline/nexo-modelagem-av3) *(repositório próprio)* | UML |
 
 ## ☕ Projetos em Java
 
